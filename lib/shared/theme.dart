@@ -1,5 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+//Setting default margin
+double defaultMargin = 24.0;
+double defaultRadius = 17.0;
 
 //Color primary / keseluruhan
 Color primaryColor = Color(0xff5C40CC);
@@ -17,6 +23,8 @@ Color softredColor = Color(0xffEB70A5);
 Color backgroundColor = Color(0xffEB70A5);
 //Color shape grey / warna abu abu
 Color greyColor = Color(0xffDBD7EC);
+//Color main / warna hijau miku
+Color mikuColor = Color(0xff086C76);
 
 //Styling text with fonts
 //Black
