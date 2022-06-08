@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:travelholic/ui/pages/sign_up.dart';
 import 'package:travelholic/ui/pages/splash_screen.dart';
+import 'package:travelholic/ui/pages/started_pages.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      routes: {
+        '/': (context) => SplashScreen(),
+        '/started-pages': (context) => StartedPages(),
+        '/sign-up': (context) => SignUp(),
+      },
     );
   }
 }

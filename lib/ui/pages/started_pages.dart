@@ -47,7 +47,9 @@ class StartedPages extends StatelessWidget {
                   height: 55,
                   margin: EdgeInsets.only(top: 50, bottom: 80),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/sign-up');
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: mikuColor,
                       shape: RoundedRectangleBorder(
