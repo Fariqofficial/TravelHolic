@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element, prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: unused_element, prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import '../../shared/theme.dart';
@@ -127,7 +127,6 @@ class SignUp extends StatelessWidget {
               ),
               TextFormField(
                 cursorColor: blackColor,
-                obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Input your occupation',
                   border: OutlineInputBorder(
@@ -149,7 +148,9 @@ class SignUp extends StatelessWidget {
           width: double.infinity,
           height: 55,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/amount-pages');
+            },
             style: TextButton.styleFrom(
               backgroundColor: mikuColor,
               shape: RoundedRectangleBorder(
@@ -166,7 +167,7 @@ class SignUp extends StatelessWidget {
 
       return Container(
         margin: EdgeInsets.only(top: 30),
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         decoration: BoxDecoration(
           color: whiteColor,
           borderRadius: BorderRadius.circular(defaultRadius),
@@ -206,7 +207,10 @@ class SignUp extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-          children: [],
+          children: [
+            title(),
+            inputSection(),
+          ],
         ),
       ),
     );

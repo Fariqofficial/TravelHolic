@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:travelholic/ui/pages/amount_pages.dart';
 import 'package:travelholic/ui/pages/sign_up.dart';
 import 'package:travelholic/ui/pages/splash_screen.dart';
 import 'package:travelholic/ui/pages/started_pages.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashScreen(),
         '/started-pages': (context) => StartedPages(),
         '/sign-up': (context) => SignUp(),
+        '/amount-pages': (context) => AmountPages(),
       },
     );
   }

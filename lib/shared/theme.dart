@@ -20,7 +20,7 @@ Color greenColor = Color(0xff0EC3AE);
 //Color booelan condition / warna merah
 Color softredColor = Color(0xffEB70A5);
 //Color background
-Color backgroundColor = Color(0xffEB70A5);
+Color backgroundColor = Color(0xffFFFFFF);
 //Color shape grey / warna abu abu
 Color greyColor = Color(0xffDBD7EC);
 //Color main / warna hijau miku
