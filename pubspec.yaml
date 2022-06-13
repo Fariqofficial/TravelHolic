@@ -78,6 +78,10 @@ flutter:
     - assets/image_unvailable.png
     - assets/logo_splash.png
     - assets/image_wallet.png
+    - assets/ic_home.png
+    - assets/ic_notif.png
+    - assets/ic_payment.png
+    - assets/ic_settings.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

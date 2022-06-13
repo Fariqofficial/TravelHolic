@@ -20,11 +20,13 @@ Color greenColor = Color(0xff0EC3AE);
 //Color booelan condition / warna merah
 Color softredColor = Color(0xffEB70A5);
 //Color background
-Color backgroundColor = Color(0xffFFFFFF);
+Color backgroundColor = Color(0xFCFCFCFC);
 //Color shape grey / warna abu abu
 Color greyColor = Color(0xffDBD7EC);
 //Color main / warna hijau miku
 Color mikuColor = Color(0xff086C76);
+//Color transparent / warna transparan
+Color transparentColor = Colors.transparent;
 
 //Styling text with fonts
 //Black

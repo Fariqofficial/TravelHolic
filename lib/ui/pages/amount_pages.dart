@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:travelholic/ui/widgets/item_button.dart';
 import '../../shared/theme.dart';
 
 class AmountPages extends StatelessWidget {
@@ -105,7 +106,7 @@ class AmountPages extends StatelessWidget {
       return Container(
         margin: EdgeInsets.only(top: 30),
         child: Text(
-          'Your account has been created,\ntop up your balance\nand start explore the world',
+          'Your account has been created,\ntop up your balance and\nstart explore the world',
           style: textGrey.copyWith(
             fontSize: 16,
             fontWeight: light,
@@ -116,28 +117,15 @@ class AmountPages extends StatelessWidget {
     }
 
     Widget buttonStart() {
-      return Container(
-        margin: EdgeInsets.only(top: 50),
+      return CustomButton(
+        title: 'Start Now',
         width: 220,
-        height: 55,
-        child: TextButton(
-          onPressed: () {},
-          style: TextButton.styleFrom(
-            backgroundColor: mikuColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                defaultRadius,
-              ),
-            ),
-          ),
-          child: Text(
-            'Start Now',
-            style: textWhite.copyWith(
-              fontSize: 18,
-              fontWeight: medium,
-            ),
-          ),
+        margin: EdgeInsets.only(
+          top: 50,
         ),
+        onPressed: () {
+          Navigator.pushNamed(context, '/main');
+        },
       );
     }
 

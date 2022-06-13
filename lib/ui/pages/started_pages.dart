@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:travelholic/ui/widgets/item_button.dart';
 import '../../shared/theme.dart';
 
 class StartedPages extends StatelessWidget {
@@ -42,28 +43,16 @@ class StartedPages extends StatelessWidget {
                   style: textWhite.copyWith(fontSize: 16, fontWeight: light),
                   textAlign: TextAlign.center,
                 ),
-                Container(
+                CustomButton(
+                  title: 'Get Started',
                   width: 220,
-                  height: 55,
-                  margin: EdgeInsets.only(top: 50, bottom: 80),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/sign-up');
-                    },
-                    style: TextButton.styleFrom(
-                      backgroundColor: mikuColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(defaultRadius),
-                      ),
-                    ),
-                    child: Text(
-                      'Get Started',
-                      style: textWhite.copyWith(
-                        fontSize: 18,
-                        fontWeight: medium,
-                      ),
-                    ),
+                  margin: EdgeInsets.only(
+                    top: 50,
+                    bottom: 80,
                   ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/sign-up');
+                  },
                 ),
               ],
             ),
