@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:travelholic/ui/pages/home_page.dart';
 import 'package:travelholic/ui/widgets/item_bottom_nav.dart';
 import '../../shared/theme.dart';
 
@@ -9,6 +10,10 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget buildContent() {
+      return HomePage();
+    }
+
     Widget bottomNavigationBar() {
       return Align(
         alignment: Alignment.bottomCenter,
@@ -50,7 +55,7 @@ class MainPage extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: Stack(
         children: [
-          Text('Main Page'),
+          buildContent(),
           bottomNavigationBar(),
         ],
       ),

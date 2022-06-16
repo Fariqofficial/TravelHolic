@@ -72,6 +72,7 @@ flutter:
     - assets/image_journey.png
     - assets/image_schedule.png
     - assets/image_selected.png
+    - assets/image_star.png
     - assets/image_started.png
     - assets/image_started.jpeg
     - assets/image_travelh.png
@@ -82,6 +83,10 @@ flutter:
     - assets/ic_notif.png
     - assets/ic_payment.png
     - assets/ic_settings.png
+    - assets/borobudur.jpeg
+    - assets/bromo.jpg
+    - assets/labuan_bajo.jpeg
+    - assets/labuan.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
