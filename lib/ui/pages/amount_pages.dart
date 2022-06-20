@@ -106,7 +106,7 @@ class AmountPages extends StatelessWidget {
       return Container(
         margin: EdgeInsets.only(top: 30),
         child: Text(
-          'Your account has been created,\ntop up your balance and\nstart explore the world',
+          'Your account has been created,\nstart travel now and get\nspecial offers from us',
           style: textGrey.copyWith(
             fontSize: 16,
             fontWeight: light,

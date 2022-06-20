@@ -87,6 +87,13 @@ flutter:
     - assets/bromo.jpg
     - assets/labuan_bajo.jpeg
     - assets/labuan.jpg
+    - assets/forest_orchid.jpg
+    - assets/kebun_raya_bogor.jpg
+    - assets/malioboro.jpg
+    - assets/pandawa.jpg
+    - assets/pantai_indah_kapuk.jpg
+    - assets/white_sand.jpg
+    - assets/kawah_putih.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

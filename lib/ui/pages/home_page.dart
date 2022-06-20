@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelholic/ui/widgets/destination_tile.dart';
 import 'package:travelholic/ui/widgets/item_destination.dart';
 import '../../shared/theme.dart';
 
@@ -33,7 +34,7 @@ class HomePage extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                    'Where do you travel today? :)',
+                    'Where do you travel today? ^^',
                     style: textGrey.copyWith(
                       fontSize: 16,
                       fontWeight: light,
@@ -91,8 +92,67 @@ class HomePage extends StatelessWidget {
                 imageUrl: 'assets/borobudur.jpeg',
                 rating: 4.6,
               ),
+              DestinationItem(
+                title: 'White Crater',
+                city: 'Central Java',
+                imageUrl: 'assets/kawah_putih.jpg',
+                rating: 4.6,
+              ),
             ],
           ),
+        ),
+      );
+    }
+
+    Widget newDestination() {
+      return Container(
+        margin: EdgeInsets.only(
+          top: 30,
+          right: defaultMargin,
+          left: defaultMargin,
+          bottom: 100,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Most Visited This Year',
+              style: textBlack.copyWith(
+                fontSize: 18,
+                fontWeight: semiBold,
+              ),
+            ),
+            DestinationTile(
+              name: 'White Sand Beach',
+              city: 'North Jakarta',
+              imageUrl: 'assets/white_sand.jpg',
+              rating: 4.8,
+            ),
+            DestinationTile(
+              name: 'Pandawa Beach',
+              city: 'Bali',
+              imageUrl: 'assets/pandawa.jpg',
+              rating: 4.7,
+            ),
+            DestinationTile(
+              name: 'Forest Orchid',
+              city: 'Lembang, West Java',
+              imageUrl: 'assets/forest_orchid.jpg',
+              rating: 4.6,
+            ),
+            DestinationTile(
+              name: 'Bogor Botanical Garden',
+              city: 'Bogor, West Java',
+              imageUrl: 'assets/kebun_raya_bogor.jpg',
+              rating: 4.6,
+            ),
+            DestinationTile(
+              name: 'Malioboro',
+              city: 'Yogyakarta',
+              imageUrl: 'assets/malioboro.jpg',
+              rating: 4.5,
+            ),
+          ],
         ),
       );
     }
@@ -101,6 +161,7 @@ class HomePage extends StatelessWidget {
       children: [
         header(),
         popularDestination(),
+        newDestination(),
       ],
     );
   }
