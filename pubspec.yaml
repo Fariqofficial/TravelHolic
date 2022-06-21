@@ -94,6 +94,11 @@ flutter:
     - assets/pantai_indah_kapuk.jpg
     - assets/white_sand.jpg
     - assets/kawah_putih.jpg
+    - assets/emblem.png
+    - assets/goa_rangko.jpg
+    - assets/padar_island.jpeg
+    - assets/pink_beach.jpg
+    - assets/pupular_place.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
