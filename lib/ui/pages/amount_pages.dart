@@ -17,7 +17,7 @@ class AmountPages extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              'assets/image_wallet.png',
+              'assets/img_card.png',
             ),
           ),
           boxShadow: [

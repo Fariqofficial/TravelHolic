@@ -8,7 +8,7 @@ double defaultMargin = 24.0;
 double defaultRadius = 17.0;
 
 //Color primary / keseluruhan
-Color primaryColor = Color(0xff5C40CC);
+Color primaryColor = Color.fromARGB(255, 2, 49, 34);
 //Color text / buat teks
 Color blackColor = Color(0xff1F1449);
 //Color header text white / warna putih
@@ -27,6 +27,14 @@ Color greyColor = Color(0xffDBD7EC);
 Color mikuColor = Color(0xff086C76);
 //Color transparent / warna transparan
 Color transparentColor = Colors.transparent;
+//Color unvailable
+Color colorUnvailable = Color(0xffEBECF1);
+//Color available
+Color colorAvailable = Color(0xff8DF6EA);
+//Color selected
+Color colorSelected = Color(0xff109888);
+//Color border available
+Color borderAvailable = Color(0xff00BF99);
 
 //Styling text with fonts
 //Black

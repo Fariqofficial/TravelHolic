@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:travelholic/ui/pages/choose_seat_page.dart';
 import 'package:travelholic/ui/widgets/item_button.dart';
 import 'package:travelholic/ui/widgets/photo_sites.dart';
 import 'package:travelholic/ui/widgets/popular_sites.dart';
@@ -236,7 +237,14 @@ class DetailPage extends StatelessWidget {
                   //NOTE : Bagian Button Bookings
                   CustomButton(
                     title: 'Book Now',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChooseSeatPages(),
+                        ),
+                      );
+                    },
                     width: 170,
                   ),
                 ],

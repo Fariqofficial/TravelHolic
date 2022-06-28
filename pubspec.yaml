@@ -74,11 +74,10 @@ flutter:
     - assets/image_selected.png
     - assets/image_star.png
     - assets/image_started.png
-    - assets/image_started.jpeg
     - assets/image_travelh.png
     - assets/image_unvailable.png
     - assets/logo_splash.png
-    - assets/image_wallet.png
+    - assets/img_card.png
     - assets/ic_home.png
     - assets/ic_notif.png
     - assets/ic_payment.png
@@ -91,7 +90,6 @@ flutter:
     - assets/kebun_raya_bogor.jpg
     - assets/malioboro.jpg
     - assets/pandawa.jpg
-    - assets/pantai_indah_kapuk.jpg
     - assets/white_sand.jpg
     - assets/kawah_putih.jpg
     - assets/emblem.png
@@ -99,6 +97,10 @@ flutter:
     - assets/padar_island.jpeg
     - assets/pink_beach.jpg
     - assets/pupular_place.png
+    - assets/img_available.png
+    - assets/img_card.png
+    - assets/img_selected.png
+    - assets/img_unavailable.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
