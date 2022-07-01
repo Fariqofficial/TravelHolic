@@ -101,6 +101,7 @@ flutter:
     - assets/img_card.png
     - assets/img_selected.png
     - assets/img_unavailable.png
+    - assets/image_route.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
-
 import 'package:flutter/material.dart';
+import 'package:travelholic/ui/pages/checkout_page.dart';
+import 'package:travelholic/ui/widgets/item_button.dart';
 import 'package:travelholic/ui/widgets/item_seat.dart';
 import '../../shared/theme.dart';
 
@@ -340,9 +341,73 @@ class ChooseSeatPages extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+
+            //NOTE: Bagian Tempat Duduk Pilihan
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Your Seat :',
+                    style: textGrey.copyWith(
+                      fontWeight: light,
+                    ),
+                  ),
+                  Text(
+                    'C5,D5',
+                    style: textBlack.copyWith(
+                      fontSize: 16,
+                      fontWeight: medium,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            //NOTE : Bagian total harga
+            Container(
+              margin: EdgeInsets.only(top: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Total :',
+                    style: textGrey.copyWith(
+                      fontWeight: light,
+                    ),
+                  ),
+                  Text(
+                    'Rp. 0',
+                    style: textGreen.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
+      );
+    }
+
+    Widget btnCheckout() {
+      return CustomButton(
+        margin: EdgeInsets.only(
+          top: 30,
+          bottom: 46,
+        ),
+        title: 'Go To Checkout',
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CheckoutPage(),
+            ),
+          );
+        },
       );
     }
 
@@ -356,6 +421,7 @@ class ChooseSeatPages extends StatelessWidget {
           title(),
           statusSeat(),
           selectSeat(),
+          btnCheckout(),
         ],
       ),
     );

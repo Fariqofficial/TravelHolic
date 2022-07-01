@@ -224,7 +224,7 @@ class DetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'IDR 5.000.000',
+                          'Rp 5.000.000',
                           style: textBlack.copyWith(
                             fontSize: 18,
                             fontWeight: medium,
