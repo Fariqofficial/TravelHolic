@@ -379,7 +379,7 @@ class ChooseSeatPages extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Rp. 0',
+                    'Rp. 10.000.000',
                     style: textGreen.copyWith(
                       fontSize: 16,
                       fontWeight: semiBold,
