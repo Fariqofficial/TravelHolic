@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelholic/cubit/auth_cubit.dart';
 import 'package:travelholic/ui/widgets/destination_tile.dart';
 import 'package:travelholic/ui/widgets/item_destination.dart';
 import '../../shared/theme.dart';
@@ -11,53 +13,61 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget header() {
-      return Container(
-        margin: EdgeInsets.only(
-          left: defaultMargin,
-          right: defaultMargin,
-          top: 30,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      return BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          if (state is AuthSuccess) {
+            return Container(
+              margin: EdgeInsets.only(
+                left: defaultMargin,
+                right: defaultMargin,
+                top: 30,
+              ),
+              child: Row(
                 children: [
-                  Text(
-                    'Hello,\nUsername',
-                    style: textBlack.copyWith(
-                      fontSize: 24,
-                      fontWeight: semiBold,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Hello,\n${state.modelUser.name}',
+                          style: textBlack.copyWith(
+                            fontSize: 24,
+                            fontWeight: semiBold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 6,
+                        ),
+                        Text(
+                          'Where do you travel today? ^^',
+                          style: textGrey.copyWith(
+                            fontSize: 16,
+                            fontWeight: light,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 6,
-                  ),
-                  Text(
-                    'Where do you travel today? ^^',
-                    style: textGrey.copyWith(
-                      fontSize: 16,
-                      fontWeight: light,
+                  Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(
+                          'assets/image_ava.png',
+                        ),
+                      ),
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
-            ),
-            Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage(
-                    'assets/image_ava.png',
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+            );
+          } else {
+            return SizedBox();
+          }
+        },
       );
     }
 

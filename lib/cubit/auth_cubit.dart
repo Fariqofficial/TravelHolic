@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:travelholic/models/model_user.dart';
 import 'package:travelholic/service/auth_service.dart';
+import 'package:travelholic/service/user_service.dart';
 
 part 'auth_state.dart';
 
@@ -32,10 +33,17 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthInitial());
     } catch (e) {
       emit(
-        AuthFailure(
-          e.toString(),
-        ),
+        AuthFailure(e.toString()),
       );
+    }
+  }
+
+  void getCurrentUser(String id) async {
+    try {
+      ModelUser model = await UserService().getUserById(id);
+      emit(AuthSuccess(model));
+    } catch (e) {
+      emit(AuthFailure(e.toString()));
     }
   }
 }

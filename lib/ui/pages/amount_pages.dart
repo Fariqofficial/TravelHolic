@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelholic/cubit/auth_cubit.dart';
 import 'package:travelholic/ui/widgets/item_button.dart';
 import '../../shared/theme.dart';
 
@@ -10,82 +12,90 @@ class AmountPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget amountCard() {
-      return Container(
-        width: 300,
-        height: 211,
-        padding: EdgeInsets.all(defaultMargin),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              'assets/img_card.png',
-            ),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: primaryColor.withOpacity(0.5),
-              blurRadius: 50,
-              offset: Offset(0, 10),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      return BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          if (state is AuthSuccess) {
+            return Container(
+              width: 300,
+              height: 211,
+              padding: EdgeInsets.all(defaultMargin),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/img_card.png',
+                  ),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: primaryColor.withOpacity(0.5),
+                    blurRadius: 50,
+                    offset: Offset(0, 10),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
                     children: [
-                      Text(
-                        'Hello',
-                        style: textWhite.copyWith(
-                          fontWeight: light,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Hello',
+                              style: textWhite.copyWith(
+                                fontWeight: light,
+                              ),
+                            ),
+                            Text(
+                              state.modelUser.name,
+                              style: textWhite.copyWith(
+                                fontWeight: medium,
+                                fontSize: 20,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
                         ),
                       ),
-                      Text(
-                        'Username',
-                        style: textWhite.copyWith(
-                          fontWeight: medium,
-                          fontSize: 20,
+                      Container(
+                        width: 30,
+                        height: 30,
+                        margin: EdgeInsets.only(right: 6),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/image_travelh.png',
+                            ),
+                          ),
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
-                ),
-                Container(
-                  width: 30,
-                  height: 30,
-                  margin: EdgeInsets.only(right: 6),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/image_travelh.png',
-                      ),
+                  SizedBox(
+                    height: 41,
+                  ),
+                  Text(
+                    'Balance',
+                    style: textWhite.copyWith(
+                      fontWeight: light,
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 41,
-            ),
-            Text(
-              'Balance',
-              style: textWhite.copyWith(
-                fontWeight: light,
+                  Text(
+                    'Rp 0',
+                    style: textWhite.copyWith(
+                      fontWeight: medium,
+                      fontSize: 26,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Text(
-              'Rp 0',
-              style: textWhite.copyWith(
-                fontWeight: medium,
-                fontSize: 26,
-              ),
-            ),
-          ],
-        ),
+            );
+          } else {
+            return SizedBox();
+          }
+        },
       );
     }
 

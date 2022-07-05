@@ -4,7 +4,8 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:travelholic/ui/pages/started_pages.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelholic/cubit/auth_cubit.dart';
 import '../../shared/theme.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushNamedAndRemoveUntil(
             context, '/started-pages', (route) => false);
       } else {
+        context.read<AuthCubit>().getCurrentUser(user.uid);
         Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
       }
     });
