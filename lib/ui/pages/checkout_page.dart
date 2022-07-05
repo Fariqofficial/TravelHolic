@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:travelholic/ui/pages/success_page.dart';
 import 'package:travelholic/ui/widgets/item_bookings.dart';
 import 'package:travelholic/ui/widgets/item_button.dart';
 import '../../shared/theme.dart';
@@ -295,7 +296,14 @@ class CheckoutPage extends StatelessWidget {
     Widget buttonPay() {
       return CustomButton(
         title: 'Pay Now',
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SuccessPage(),
+            ),
+          );
+        },
         margin: EdgeInsets.only(top: 30),
       );
     }
