@@ -83,7 +83,7 @@ class AmountPages extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Rp 0',
+                    'Rp. ${state.modelUser.balance}',
                     style: textWhite.copyWith(
                       fontWeight: medium,
                       fontSize: 26,

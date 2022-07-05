@@ -7,8 +7,8 @@ import 'package:travelholic/ui/widgets/item_button.dart';
 import 'package:travelholic/ui/widgets/item_textfield.dart';
 import '../../shared/theme.dart';
 
-class SignUp extends StatelessWidget {
-  SignUp({Key? key}) : super(key: key);
+class SignIn extends StatelessWidget {
+  SignIn({Key? key}) : super(key: key);
 
   //Controller untuk menghandle perubahan value
   final TextEditingController nameController = TextEditingController(
@@ -33,7 +33,7 @@ class SignUp extends StatelessWidget {
       return Container(
         margin: EdgeInsets.only(top: 30),
         child: Text(
-          'Join us and capture \nyour travelling moment',
+          'Sign In with your\nexisting account',
           style: textBlack.copyWith(
             fontSize: 24,
             fontWeight: semiBold,
@@ -43,14 +43,6 @@ class SignUp extends StatelessWidget {
     }
 
     Widget inputSection() {
-      Widget nameInput() {
-        return CustomTextField(
-          title: 'Fullname',
-          hintText: 'Input your full name',
-          controller: nameController,
-        );
-      }
-
       Widget emailInput() {
         return CustomTextField(
           title: 'Email Address',
@@ -65,14 +57,6 @@ class SignUp extends StatelessWidget {
           hintText: 'Input your password',
           obsecureText: true,
           controller: passwordController,
-        );
-      }
-
-      Widget occupationInput() {
-        return CustomTextField(
-          title: 'Occupation (optional)',
-          hintText: 'Input your occupation',
-          controller: occupationController,
         );
       }
 
@@ -99,7 +83,7 @@ class SignUp extends StatelessWidget {
               );
             }
             return CustomButton(
-              title: 'Sign Up',
+              title: 'Sign In',
               onPressed: () {
                 context.read<AuthCubit>().signUp(
                       email: emailController.text,
@@ -121,21 +105,15 @@ class SignUp extends StatelessWidget {
           borderRadius: BorderRadius.circular(defaultRadius),
         ),
         child: Column(
-          children: [
-            nameInput(),
-            emailInput(),
-            passwordInput(),
-            occupationInput(),
-            buttonSubmit()
-          ],
+          children: [emailInput(), passwordInput(), buttonSubmit()],
         ),
       );
     }
 
-    Widget signInButton() {
+    Widget termsCondition() {
       return GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/sign-in');
+          Navigator.pop(context);
         },
         child: Container(
           alignment: Alignment.center,
@@ -144,7 +122,7 @@ class SignUp extends StatelessWidget {
             bottom: 73,
           ),
           child: Text(
-            'Have an account? Sign In Here',
+            'Don\'t have account? Sign Up Now',
             style: textGrey.copyWith(
               fontSize: 16,
               fontWeight: light,
@@ -162,7 +140,6 @@ class SignUp extends StatelessWidget {
           children: [
             title(),
             inputSection(),
-            signInButton(),
           ],
         ),
       ),

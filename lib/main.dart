@@ -7,6 +7,7 @@ import 'package:travelholic/cubit/auth_cubit.dart';
 import 'package:travelholic/cubit/cubit_cubit.dart';
 import 'package:travelholic/ui/pages/amount_pages.dart';
 import 'package:travelholic/ui/pages/main_page.dart';
+import 'package:travelholic/ui/pages/sign_in.dart';
 import 'package:travelholic/ui/pages/sign_up.dart';
 import 'package:travelholic/ui/pages/splash_screen.dart';
 import 'package:travelholic/ui/pages/started_pages.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => SplashScreen(),
           '/started-pages': (context) => StartedPages(),
           '/sign-up': (context) => SignUp(),
+          '/sign-in': (context) => SignIn(),
           '/amount-pages': (context) => AmountPages(),
           '/main': (context) => MainPage(),
         },
