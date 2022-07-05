@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:travelholic/ui/pages/started_pages.dart';
 import '../../shared/theme.dart';
@@ -17,12 +18,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(Duration(seconds: 3), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => StartedPages(),
-        ),
-      );
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/started-pages', (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
+      }
     });
     super.initState();
   }

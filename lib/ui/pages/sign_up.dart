@@ -1,12 +1,31 @@
 // ignore_for_file: unused_element, prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelholic/cubit/auth_cubit.dart';
 import 'package:travelholic/ui/widgets/item_button.dart';
 import 'package:travelholic/ui/widgets/item_textfield.dart';
 import '../../shared/theme.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  SignUp({Key? key}) : super(key: key);
+
+  //Controller untuk menghandle perubahan value
+  final TextEditingController nameController = TextEditingController(
+    text: '',
+  );
+
+  final TextEditingController emailController = TextEditingController(
+    text: '',
+  );
+
+  final TextEditingController passwordController = TextEditingController(
+    text: '',
+  );
+
+  final TextEditingController occupationController = TextEditingController(
+    text: '',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +47,7 @@ class SignUp extends StatelessWidget {
         return CustomTextField(
           title: 'Fullname',
           hintText: 'Input your full name',
+          controller: nameController,
         );
       }
 
@@ -35,6 +55,7 @@ class SignUp extends StatelessWidget {
         return CustomTextField(
           title: 'Email Address',
           hintText: 'Input your email address',
+          controller: emailController,
         );
       }
 
@@ -43,6 +64,7 @@ class SignUp extends StatelessWidget {
           title: 'Password',
           hintText: 'Input your password',
           obsecureText: true,
+          controller: passwordController,
         );
       }
 
@@ -50,14 +72,43 @@ class SignUp extends StatelessWidget {
         return CustomTextField(
           title: 'Occupation (optional)',
           hintText: 'Input your occupation',
+          controller: occupationController,
         );
       }
 
       Widget buttonSubmit() {
-        return CustomButton(
-          title: 'Sign Up',
-          onPressed: () {
-            Navigator.pushNamed(context, '/amount-pages');
+        return BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is AuthSuccess) {
+              //Ketika sudah navigasi tidak bisa kembali ke menu sebelumnya
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/amount-pages', (route) => false);
+            } else if (state is AuthFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: softredColor,
+                  content: Text(state.errorMsg),
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            if (state is AuthLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return CustomButton(
+              title: 'Sign Up',
+              onPressed: () {
+                context.read<AuthCubit>().signUp(
+                      email: emailController.text,
+                      password: passwordController.text,
+                      name: nameController.text,
+                      occupation: occupationController.text,
+                    );
+              },
+            );
           },
         );
       }

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "485305051487",
+    "project_id": "travelholic-94927",
+    "storage_bucket": "travelholic-94927.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485305051487:android:d8cd1eef914ef529446eea",
+        "android_client_info": {
+          "package_name": "com.fardev.travelholic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485305051487-cur3h9b3l75koihrpose4ke0glilrff7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlLxpvw10XnJ4T0xmpFhFfja0aYILHH6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485305051487-cur3h9b3l75koihrpose4ke0glilrff7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "485305051487-pv9le3b8e63emk5ocurg1ui10aqt1nfo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fardev.travelholic"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
