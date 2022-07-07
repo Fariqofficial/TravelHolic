@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelholic/cubit/auth_cubit.dart';
+import 'package:travelholic/cubit/cubit_cubit.dart';
 import 'package:travelholic/shared/theme.dart';
 import 'package:travelholic/ui/widgets/item_button.dart';
 
@@ -21,8 +22,9 @@ class SettingPages extends StatelessWidget {
             ),
           );
         } else if (state is AuthInitial) {
+          context.read<CubitCubit>().setPage(0);
           Navigator.pushNamedAndRemoveUntil(
-              context, '/sign-up', (route) => false);
+              context, '/sign-in', (route) => false);
         }
       },
       builder: (context, state) {

@@ -7,6 +7,22 @@ import 'package:travelholic/service/user_service.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  Future<ModelUser> signIn({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      UserCredential credential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      ModelUser user = await UserService().getUserById(credential.user!.uid);
+      return user;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   Future<ModelUser> signUp(
       {required String email,
       required String password,

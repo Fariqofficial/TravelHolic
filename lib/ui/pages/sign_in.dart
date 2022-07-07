@@ -11,19 +11,11 @@ class SignIn extends StatelessWidget {
   SignIn({Key? key}) : super(key: key);
 
   //Controller untuk menghandle perubahan value
-  final TextEditingController nameController = TextEditingController(
-    text: '',
-  );
-
   final TextEditingController emailController = TextEditingController(
     text: '',
   );
 
   final TextEditingController passwordController = TextEditingController(
-    text: '',
-  );
-
-  final TextEditingController occupationController = TextEditingController(
     text: '',
   );
 
@@ -66,7 +58,7 @@ class SignIn extends StatelessWidget {
             if (state is AuthSuccess) {
               //Ketika sudah navigasi tidak bisa kembali ke menu sebelumnya
               Navigator.pushNamedAndRemoveUntil(
-                  context, '/amount-pages', (route) => false);
+                  context, '/main', (route) => false);
             } else if (state is AuthFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -85,11 +77,9 @@ class SignIn extends StatelessWidget {
             return CustomButton(
               title: 'Sign In',
               onPressed: () {
-                context.read<AuthCubit>().signUp(
+                context.read<AuthCubit>().signIn(
                       email: emailController.text,
                       password: passwordController.text,
-                      name: nameController.text,
-                      occupation: occupationController.text,
                     );
               },
             );
@@ -110,10 +100,10 @@ class SignIn extends StatelessWidget {
       );
     }
 
-    Widget termsCondition() {
+    Widget signUpButton() {
       return GestureDetector(
         onTap: () {
-          Navigator.pop(context);
+          Navigator.pushNamed(context, '/sign-up');
         },
         child: Container(
           alignment: Alignment.center,
@@ -140,6 +130,7 @@ class SignIn extends StatelessWidget {
           children: [
             title(),
             inputSection(),
+            signUpButton(),
           ],
         ),
       ),
