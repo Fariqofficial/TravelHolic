@@ -4,6 +4,7 @@ import 'package:travelholic/cubit/auth_cubit.dart';
 import 'package:travelholic/cubit/destination_cubit_cubit.dart';
 import 'package:travelholic/ui/widgets/destination_tile.dart';
 import 'package:travelholic/ui/widgets/item_destination.dart';
+import '../../models/model_destination.dart';
 import '../../shared/theme.dart';
 
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
@@ -83,50 +84,21 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    Widget popularDestination() {
+    Widget popularDestination(List<ModelDestination> destinations) {
       return Container(
         margin: EdgeInsets.only(top: 30),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: [
-              // DestinationItem(
-              //   title: 'Labuan Bajo',
-              //   city: 'East Nusa Tenggara',
-              //   imageUrl: 'assets/labuan.jpg',
-              //   rating: 4.8,
-              // ),
-              // DestinationItem(
-              //   title: 'Mountain Bromo',
-              //   city: 'East Java',
-              //   imageUrl: 'assets/bromo.jpg',
-              //   rating: 4.7,
-              // ),
-              // DestinationItem(
-              //   title: 'Garuda Wisnu Kencana',
-              //   city: 'Bali',
-              //   imageUrl: 'assets/gwk.jpeg',
-              //   rating: 4.7,
-              // ),
-              // DestinationItem(
-              //   title: 'Borobudur Temple',
-              //   city: 'Central Java',
-              //   imageUrl: 'assets/borobudur.jpeg',
-              //   rating: 4.6,
-              // ),
-              // DestinationItem(
-              //   title: 'White Crater',
-              //   city: 'Central Java',
-              //   imageUrl: 'assets/kawah_putih.jpg',
-              //   rating: 4.6,
-              // ),
-            ],
+            children: destinations.map((ModelDestination destination) {
+              return DestinationItem(destination);
+            }).toList(),
           ),
         ),
       );
     }
 
-    Widget newDestination() {
+    Widget newDestination(List<ModelDestination> destinations) {
       return Container(
         margin: EdgeInsets.only(
           top: 30,
@@ -144,36 +116,11 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: semiBold,
               ),
             ),
-            // DestinationTile(
-            //   name: 'White Sand Beach',
-            //   city: 'North Jakarta',
-            //   imageUrl: 'assets/white_sand.jpg',
-            //   rating: 4.8,
-            // ),
-            // DestinationTile(
-            //   name: 'Pandawa Beach',
-            //   city: 'Bali',
-            //   imageUrl: 'assets/pandawa.jpg',
-            //   rating: 4.7,
-            // ),
-            // DestinationTile(
-            //   name: 'Forest Orchid',
-            //   city: 'Lembang, West Java',
-            //   imageUrl: 'assets/forest_orchid.jpg',
-            //   rating: 4.6,
-            // ),
-            // DestinationTile(
-            //   name: 'Bogor Botanical Garden',
-            //   city: 'Bogor, West Java',
-            //   imageUrl: 'assets/kebun_raya_bogor.jpg',
-            //   rating: 4.6,
-            // ),
-            // DestinationTile(
-            //   name: 'Malioboro',
-            //   city: 'Yogyakarta',
-            //   imageUrl: 'assets/malioboro.jpg',
-            //   rating: 4.5,
-            // ),
+            Column(
+              children: destinations.map((ModelDestination destination) {
+                return DestinationTile(destination);
+              }).toList(),
+            ),
           ],
         ),
       );
@@ -195,8 +142,8 @@ class _HomePageState extends State<HomePage> {
           return ListView(
             children: [
               header(),
-              popularDestination(),
-              newDestination(),
+              popularDestination(state.destinations),
+              newDestination(state.destinations),
             ],
           );
         }

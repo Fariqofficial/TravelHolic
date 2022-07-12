@@ -108,14 +108,14 @@ class DetailPage extends StatelessWidget {
                         margin: EdgeInsets.only(right: 2),
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(
-                              model.imageUrl,
+                            image: AssetImage(
+                              'assets/image_star.png',
                             ),
                           ),
                         ),
                       ),
                       Text(
-                        '0.0',
+                        model.rating.toString(),
                         style: textWhite.copyWith(
                           fontWeight: medium,
                         ),
