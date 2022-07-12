@@ -40,6 +40,7 @@ dependencies:
   firebase_core: ^1.19.1
   cloud_firestore: ^3.2.1
   equatable: ^2.0.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -109,6 +110,19 @@ flutter:
     - assets/image_route.png
     - assets/image_ceklis.png
     - assets/img_schedule.png
+    - assets/bukit_teletubies.jpeg
+    - assets/ciwalini_hotspring.jpeg
+    - assets/gereja_ayam.jpeg
+    - assets/mentigen_bromo.jpg
+    - assets/pantai_padang.jpeg
+    - assets/paragliding.jpg
+    - assets/ranca_upas.jpeg
+    - assets/savana_bromo.jpeg
+    - assets/situ_patenggang.jpeg
+    - assets/sungai_elo.jpeg
+    - assets/svargabumi.jpeg
+    - assets/waterpark_nirmala.jpeg
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

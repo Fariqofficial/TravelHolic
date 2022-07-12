@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelholic/cubit/auth_cubit.dart';
+import 'package:travelholic/cubit/destination_cubit_cubit.dart';
 import 'package:travelholic/ui/widgets/destination_tile.dart';
 import 'package:travelholic/ui/widgets/item_destination.dart';
 import '../../shared/theme.dart';
 
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    context.read<DestinationCubitCubit>().fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,36 +90,36 @@ class HomePage extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              DestinationItem(
-                title: 'Labuan Bajo',
-                city: 'East Nusa Tenggara',
-                imageUrl: 'assets/labuan.jpg',
-                rating: 4.8,
-              ),
-              DestinationItem(
-                title: 'Mountain Bromo',
-                city: 'East Java',
-                imageUrl: 'assets/bromo.jpg',
-                rating: 4.7,
-              ),
-              DestinationItem(
-                title: 'Garuda Wisnu Kencana',
-                city: 'Bali',
-                imageUrl: 'assets/gwk.jpeg',
-                rating: 4.7,
-              ),
-              DestinationItem(
-                title: 'Borobudur Temple',
-                city: 'Central Java',
-                imageUrl: 'assets/borobudur.jpeg',
-                rating: 4.6,
-              ),
-              DestinationItem(
-                title: 'White Crater',
-                city: 'Central Java',
-                imageUrl: 'assets/kawah_putih.jpg',
-                rating: 4.6,
-              ),
+              // DestinationItem(
+              //   title: 'Labuan Bajo',
+              //   city: 'East Nusa Tenggara',
+              //   imageUrl: 'assets/labuan.jpg',
+              //   rating: 4.8,
+              // ),
+              // DestinationItem(
+              //   title: 'Mountain Bromo',
+              //   city: 'East Java',
+              //   imageUrl: 'assets/bromo.jpg',
+              //   rating: 4.7,
+              // ),
+              // DestinationItem(
+              //   title: 'Garuda Wisnu Kencana',
+              //   city: 'Bali',
+              //   imageUrl: 'assets/gwk.jpeg',
+              //   rating: 4.7,
+              // ),
+              // DestinationItem(
+              //   title: 'Borobudur Temple',
+              //   city: 'Central Java',
+              //   imageUrl: 'assets/borobudur.jpeg',
+              //   rating: 4.6,
+              // ),
+              // DestinationItem(
+              //   title: 'White Crater',
+              //   city: 'Central Java',
+              //   imageUrl: 'assets/kawah_putih.jpg',
+              //   rating: 4.6,
+              // ),
             ],
           ),
         ),
@@ -132,47 +144,66 @@ class HomePage extends StatelessWidget {
                 fontWeight: semiBold,
               ),
             ),
-            DestinationTile(
-              name: 'White Sand Beach',
-              city: 'North Jakarta',
-              imageUrl: 'assets/white_sand.jpg',
-              rating: 4.8,
-            ),
-            DestinationTile(
-              name: 'Pandawa Beach',
-              city: 'Bali',
-              imageUrl: 'assets/pandawa.jpg',
-              rating: 4.7,
-            ),
-            DestinationTile(
-              name: 'Forest Orchid',
-              city: 'Lembang, West Java',
-              imageUrl: 'assets/forest_orchid.jpg',
-              rating: 4.6,
-            ),
-            DestinationTile(
-              name: 'Bogor Botanical Garden',
-              city: 'Bogor, West Java',
-              imageUrl: 'assets/kebun_raya_bogor.jpg',
-              rating: 4.6,
-            ),
-            DestinationTile(
-              name: 'Malioboro',
-              city: 'Yogyakarta',
-              imageUrl: 'assets/malioboro.jpg',
-              rating: 4.5,
-            ),
+            // DestinationTile(
+            //   name: 'White Sand Beach',
+            //   city: 'North Jakarta',
+            //   imageUrl: 'assets/white_sand.jpg',
+            //   rating: 4.8,
+            // ),
+            // DestinationTile(
+            //   name: 'Pandawa Beach',
+            //   city: 'Bali',
+            //   imageUrl: 'assets/pandawa.jpg',
+            //   rating: 4.7,
+            // ),
+            // DestinationTile(
+            //   name: 'Forest Orchid',
+            //   city: 'Lembang, West Java',
+            //   imageUrl: 'assets/forest_orchid.jpg',
+            //   rating: 4.6,
+            // ),
+            // DestinationTile(
+            //   name: 'Bogor Botanical Garden',
+            //   city: 'Bogor, West Java',
+            //   imageUrl: 'assets/kebun_raya_bogor.jpg',
+            //   rating: 4.6,
+            // ),
+            // DestinationTile(
+            //   name: 'Malioboro',
+            //   city: 'Yogyakarta',
+            //   imageUrl: 'assets/malioboro.jpg',
+            //   rating: 4.5,
+            // ),
           ],
         ),
       );
     }
 
-    return ListView(
-      children: [
-        header(),
-        popularDestination(),
-        newDestination(),
-      ],
+    return BlocConsumer<DestinationCubitCubit, DestinationCubitState>(
+      listener: (context, state) {
+        if (state is DestinationFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: softredColor,
+              content: Text(state.error),
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is DestinationSuccess) {
+          return ListView(
+            children: [
+              header(),
+              popularDestination(),
+              newDestination(),
+            ],
+          );
+        }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }

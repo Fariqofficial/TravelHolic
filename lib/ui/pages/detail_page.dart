@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:travelholic/models/model_destination.dart';
 import 'package:travelholic/ui/pages/choose_seat_page.dart';
 import 'package:travelholic/ui/widgets/item_button.dart';
 import 'package:travelholic/ui/widgets/photo_sites.dart';
@@ -8,7 +10,9 @@ import 'package:travelholic/ui/widgets/popular_sites.dart';
 import '../../shared/theme.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final ModelDestination model;
+
+  const DetailPage(this.model, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +23,8 @@ class DetailPage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage(
-              'assets/labuan.jpg',
+            image: NetworkImage(
+              model.imageUrl,
             ),
           ),
         ),
@@ -77,7 +81,7 @@ class DetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Labuan Bajo',
+                          model.name,
                           style: textWhite.copyWith(
                             fontSize: 24,
                             fontWeight: semiBold,
@@ -85,7 +89,7 @@ class DetailPage extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          'East Nusa Tenggara',
+                          model.city,
                           style: textWhite.copyWith(
                             fontSize: 16,
                             fontWeight: light,
@@ -104,8 +108,8 @@ class DetailPage extends StatelessWidget {
                         margin: EdgeInsets.only(right: 2),
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(
-                              'assets/image_star.png',
+                            image: NetworkImage(
+                              model.imageUrl,
                             ),
                           ),
                         ),
@@ -148,7 +152,7 @@ class DetailPage extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                    'Labuan Bajo is a hidden paradise in eastern Indonesia. This village is located in Komodo District, West Manggarai Regency, East Nusa Tenggara Province.',
+                    model.description,
                     style: textBlack.copyWith(
                       height: 2,
                     ),
@@ -224,7 +228,13 @@ class DetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Rp 5.000.000',
+                          NumberFormat.currency(
+                            locale: 'id',
+                            symbol: 'Rp ',
+                            decimalDigits: 0,
+                          ).format(
+                            model.price,
+                          ),
                           style: textBlack.copyWith(
                             fontSize: 18,
                             fontWeight: medium,

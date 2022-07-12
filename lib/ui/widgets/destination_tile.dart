@@ -1,22 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:travelholic/models/model_destination.dart';
 import 'package:travelholic/ui/pages/detail_page.dart';
 import '../../shared/theme.dart';
 
 class DestinationTile extends StatelessWidget {
-  final String name;
-  final String city;
-  final String imageUrl;
-  final double rating;
+  final ModelDestination model;
 
-  const DestinationTile({
-    Key? key,
-    required this.name,
-    required this.city,
-    required this.imageUrl,
-    this.rating = 0.0,
-  }) : super(key: key);
+  const DestinationTile(this.model, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +17,7 @@ class DestinationTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailPage(),
+            builder: (context) => DetailPage(model),
           ),
         );
       },
@@ -46,8 +38,8 @@ class DestinationTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
-                    imageUrl,
+                  image: NetworkImage(
+                    model.imageUrl,
                   ),
                 ),
               ),
@@ -57,7 +49,7 @@ class DestinationTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    model.name,
                     style: textBlack.copyWith(
                       fontSize: 18,
                       fontWeight: medium,
@@ -67,7 +59,7 @@ class DestinationTile extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    city,
+                    model.city,
                     style: textGrey.copyWith(
                       fontWeight: light,
                     ),
@@ -92,7 +84,7 @@ class DestinationTile extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  rating.toString(),
+                  model.rating.toString(),
                   style: textBlack.copyWith(
                     fontWeight: medium,
                   ),

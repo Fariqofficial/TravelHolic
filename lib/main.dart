@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travelholic/cubit/auth_cubit.dart';
 import 'package:travelholic/cubit/cubit_cubit.dart';
+import 'package:travelholic/cubit/destination_cubit_cubit.dart';
 import 'package:travelholic/ui/pages/amount_pages.dart';
 import 'package:travelholic/ui/pages/main_page.dart';
 import 'package:travelholic/ui/pages/sign_in.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AuthCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DestinationCubitCubit(),
         ),
       ],
       child: MaterialApp(
