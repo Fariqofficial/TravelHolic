@@ -8,7 +8,7 @@ class PopularSites extends StatelessWidget {
 
   const PopularSites({
     Key? key,
-    required this.place,
+    this.place = '',
   }) : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class PopularSites extends StatelessWidget {
           Container(
             width: 16,
             height: 16,
-            margin: EdgeInsets.only(right: 6),
+            margin: EdgeInsets.symmetric(vertical: 8),
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -32,6 +32,7 @@ class PopularSites extends StatelessWidget {
           Text(
             place,
             style: textBlack,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

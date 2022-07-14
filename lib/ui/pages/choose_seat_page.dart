@@ -1,12 +1,18 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:travelholic/cubit/seat_cubit.dart';
+import 'package:travelholic/models/model_destination.dart';
 import 'package:travelholic/ui/pages/checkout_page.dart';
 import 'package:travelholic/ui/widgets/item_button.dart';
 import 'package:travelholic/ui/widgets/item_seat.dart';
 import '../../shared/theme.dart';
 
 class ChooseSeatPages extends StatelessWidget {
-  const ChooseSeatPages({Key? key}) : super(key: key);
+  final ModelDestination model;
+
+  const ChooseSeatPages(this.model, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,303 +99,319 @@ class ChooseSeatPages extends StatelessWidget {
     }
 
     Widget selectSeat() {
-      return Container(
-        margin: EdgeInsets.only(top: 30),
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(
-          horizontal: 22,
-          vertical: 30,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-          color: whiteColor,
-        ),
-        child: Column(
-          children: [
-            //NOTE : Indikator Seat
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      return BlocBuilder<SeatCubit, List<String>>(
+        builder: (context, state) {
+          return Container(
+            margin: EdgeInsets.only(top: 30),
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+              horizontal: 22,
+              vertical: 30,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              color: whiteColor,
+            ),
+            child: Column(
               children: [
-                Container(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      'A',
-                      style: textGrey.copyWith(
-                        fontSize: 16,
+                //NOTE : Indikator Seat
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          'A',
+                          style: textGrey.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
                     ),
+                    Container(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          'B',
+                          style: textGrey.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          '',
+                          style: textGrey.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          'C',
+                          style: textGrey.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 48,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          'D',
+                          style: textGrey.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                //NOTE : Bagian Seat Pertama
+                Container(
+                  margin: EdgeInsets.only(top: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SeatItem(
+                        id: 'A1',
+                      ),
+                      SeatItem(
+                        id: 'B1',
+                        isAvail: false,
+                      ),
+                      Container(
+                        width: 48,
+                        height: 49,
+                        child: Center(
+                          child: Text(
+                            '1',
+                            style: textGrey.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SeatItem(
+                        id: 'c1',
+                        isAvail: false,
+                      ),
+                      SeatItem(
+                        id: 'D1',
+                      ),
+                    ],
                   ),
                 ),
+
+                //NOTE : Bagian Seat Kedua
                 Container(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      'B',
-                      style: textGrey.copyWith(
-                        fontSize: 16,
+                  margin: EdgeInsets.only(top: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SeatItem(
+                        id: 'A2',
                       ),
-                    ),
+                      SeatItem(
+                        id: 'B2',
+                        isAvail: false,
+                      ),
+                      Container(
+                        width: 48,
+                        height: 49,
+                        child: Center(
+                          child: Text(
+                            '2',
+                            style: textGrey.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SeatItem(
+                        id: 'C2',
+                      ),
+                      SeatItem(
+                        id: 'D2',
+                        isAvail: false,
+                      ),
+                    ],
                   ),
                 ),
+
+                //NOTE : Bagian Seat Ketiga
                 Container(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      '',
-                      style: textGrey.copyWith(
-                        fontSize: 16,
+                  margin: EdgeInsets.only(top: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SeatItem(
+                        id: 'A3',
+                        isAvail: false,
                       ),
-                    ),
+                      SeatItem(
+                        id: 'B3',
+                        isAvail: false,
+                      ),
+                      Container(
+                        width: 48,
+                        height: 49,
+                        child: Center(
+                          child: Text(
+                            '3',
+                            style: textGrey.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SeatItem(
+                        id: 'C3',
+                      ),
+                      SeatItem(
+                        id: 'D3',
+                      ),
+                    ],
                   ),
                 ),
+
+                //NOTE : Bagian Seat Keempat
                 Container(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      'C',
-                      style: textGrey.copyWith(
-                        fontSize: 16,
+                  margin: EdgeInsets.only(top: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SeatItem(
+                        id: 'A4',
                       ),
-                    ),
+                      SeatItem(
+                        id: 'B4',
+                      ),
+                      Container(
+                        width: 48,
+                        height: 49,
+                        child: Center(
+                          child: Text(
+                            '4',
+                            style: textGrey.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SeatItem(
+                        id: 'C4',
+                      ),
+                      SeatItem(
+                        id: 'D4',
+                      ),
+                    ],
                   ),
                 ),
+
+                //NOTE : Bagian Seat Kelima
                 Container(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      'D',
-                      style: textGrey.copyWith(
-                        fontSize: 16,
+                  margin: EdgeInsets.only(top: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SeatItem(
+                        id: 'A5',
                       ),
-                    ),
+                      SeatItem(
+                        id: 'B5',
+                      ),
+                      Container(
+                        width: 48,
+                        height: 49,
+                        child: Center(
+                          child: Text(
+                            '5',
+                            style: textGrey.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SeatItem(
+                        id: 'C5',
+                      ),
+                      SeatItem(
+                        id: 'D5',
+                      ),
+                    ],
+                  ),
+                ),
+
+                //NOTE: Bagian Tempat Duduk Pilihan
+                Container(
+                  margin: EdgeInsets.only(top: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Your Seat :',
+                        style: textGrey.copyWith(
+                          fontWeight: light,
+                        ),
+                      ),
+                      Text(
+                        state.join(', '),
+                        style: textBlack.copyWith(
+                          fontSize: 16,
+                          fontWeight: medium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                //NOTE : Bagian total harga
+                Container(
+                  margin: EdgeInsets.only(top: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Total :',
+                        style: textGrey.copyWith(
+                          fontWeight: light,
+                        ),
+                      ),
+                      Text(
+                        NumberFormat.currency(
+                          locale: 'id',
+                          symbol: 'Rp ',
+                          decimalDigits: 0,
+                        ).format(
+                          state.length * model.price,
+                        ),
+                        style: textGreen.copyWith(
+                          fontSize: 16,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-
-            //NOTE : Bagian Seat Pertama
-            Container(
-              margin: EdgeInsets.only(top: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SeatItem(
-                    status: 2,
-                  ),
-                  SeatItem(
-                    status: 0,
-                  ),
-                  Container(
-                    width: 48,
-                    height: 49,
-                    child: Center(
-                      child: Text(
-                        '1',
-                        style: textGrey.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SeatItem(
-                    status: 0,
-                  ),
-                  SeatItem(
-                    status: 2,
-                  ),
-                ],
-              ),
-            ),
-
-            //NOTE : Bagian Seat Kedua
-            Container(
-              margin: EdgeInsets.only(top: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SeatItem(
-                    status: 0,
-                  ),
-                  SeatItem(
-                    status: 0,
-                  ),
-                  Container(
-                    width: 48,
-                    height: 49,
-                    child: Center(
-                      child: Text(
-                        '2',
-                        style: textGrey.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SeatItem(
-                    status: 0,
-                  ),
-                  SeatItem(
-                    status: 2,
-                  ),
-                ],
-              ),
-            ),
-
-            //NOTE : Bagian Seat Ketiga
-            Container(
-              margin: EdgeInsets.only(top: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SeatItem(
-                    status: 2,
-                  ),
-                  SeatItem(
-                    status: 0,
-                  ),
-                  Container(
-                    width: 48,
-                    height: 49,
-                    child: Center(
-                      child: Text(
-                        '3',
-                        style: textGrey.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SeatItem(
-                    status: 0,
-                  ),
-                  SeatItem(
-                    status: 2,
-                  ),
-                ],
-              ),
-            ),
-
-            //NOTE : Bagian Seat Keempat
-            Container(
-              margin: EdgeInsets.only(top: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SeatItem(
-                    status: 0,
-                  ),
-                  SeatItem(
-                    status: 2,
-                  ),
-                  Container(
-                    width: 48,
-                    height: 49,
-                    child: Center(
-                      child: Text(
-                        '4',
-                        style: textGrey.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SeatItem(
-                    status: 2,
-                  ),
-                  SeatItem(
-                    status: 2,
-                  ),
-                ],
-              ),
-            ),
-
-            //NOTE : Bagian Seat Kelima
-            Container(
-              margin: EdgeInsets.only(top: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SeatItem(
-                    status: 2,
-                  ),
-                  SeatItem(
-                    status: 2,
-                  ),
-                  Container(
-                    width: 48,
-                    height: 49,
-                    child: Center(
-                      child: Text(
-                        '5',
-                        style: textGrey.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SeatItem(
-                    status: 1,
-                  ),
-                  SeatItem(
-                    status: 1,
-                  ),
-                ],
-              ),
-            ),
-
-            //NOTE: Bagian Tempat Duduk Pilihan
-            Container(
-              margin: EdgeInsets.only(top: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Your Seat :',
-                    style: textGrey.copyWith(
-                      fontWeight: light,
-                    ),
-                  ),
-                  Text(
-                    'C5,D5',
-                    style: textBlack.copyWith(
-                      fontSize: 16,
-                      fontWeight: medium,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            //NOTE : Bagian total harga
-            Container(
-              margin: EdgeInsets.only(top: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Total :',
-                    style: textGrey.copyWith(
-                      fontWeight: light,
-                    ),
-                  ),
-                  Text(
-                    'Rp. 10.000.000',
-                    style: textGreen.copyWith(
-                      fontSize: 16,
-                      fontWeight: semiBold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       );
     }
 

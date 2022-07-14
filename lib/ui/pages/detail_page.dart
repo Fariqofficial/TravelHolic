@@ -194,10 +194,10 @@ class DetailPage extends StatelessWidget {
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       PopularSites(
-                        place: 'Padar Island',
+                        place: model.popularName1,
                       ),
                       PopularSites(
-                        place: 'Pink Beach',
+                        place: model.popularName2,
                       ),
                     ],
                   ),
@@ -208,7 +208,7 @@ class DetailPage extends StatelessWidget {
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       PopularSites(
-                        place: 'Rangko Cave',
+                        place: model.popularName3,
                       ),
                     ],
                   ),
@@ -251,7 +251,7 @@ class DetailPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ChooseSeatPages(),
+                          builder: (context) => ChooseSeatPages(model),
                         ),
                       );
                     },
