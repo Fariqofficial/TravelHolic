@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: ^3.2.1
   equatable: ^2.0.3
   intl: ^0.17.0
+  sp_initials: ^0.0.4
 
 dev_dependencies:
   flutter_test:

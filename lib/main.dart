@@ -7,12 +7,14 @@ import 'package:travelholic/cubit/auth_cubit.dart';
 import 'package:travelholic/cubit/cubit_cubit.dart';
 import 'package:travelholic/cubit/destination_cubit_cubit.dart';
 import 'package:travelholic/cubit/seat_cubit.dart';
+import 'package:travelholic/cubit/transaction_cubit.dart';
 import 'package:travelholic/ui/pages/amount_pages.dart';
 import 'package:travelholic/ui/pages/main_page.dart';
 import 'package:travelholic/ui/pages/sign_in.dart';
 import 'package:travelholic/ui/pages/sign_up.dart';
 import 'package:travelholic/ui/pages/splash_screen.dart';
 import 'package:travelholic/ui/pages/started_pages.dart';
+import 'package:travelholic/ui/pages/success_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +42,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SeatCubit(),
         ),
+        BlocProvider(
+          create: (context) => TransactionCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -50,6 +55,7 @@ class MyApp extends StatelessWidget {
           '/sign-in': (context) => SignIn(),
           '/amount-pages': (context) => AmountPages(),
           '/main': (context) => MainPage(),
+          '/success': (context) => SuccessPage(),
         },
       ),
     );

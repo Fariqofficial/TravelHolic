@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:travelholic/cubit/seat_cubit.dart';
 import 'package:travelholic/models/model_destination.dart';
+import 'package:travelholic/models/model_transaction.dart';
 import 'package:travelholic/ui/pages/checkout_page.dart';
 import 'package:travelholic/ui/widgets/item_button.dart';
 import 'package:travelholic/ui/widgets/item_seat.dart';
@@ -416,18 +417,34 @@ class ChooseSeatPages extends StatelessWidget {
     }
 
     Widget btnCheckout() {
-      return CustomButton(
-        margin: EdgeInsets.only(
-          top: 30,
-          bottom: 46,
-        ),
-        title: 'Go To Checkout',
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CheckoutPage(),
+      return BlocBuilder<SeatCubit, List<String>>(
+        builder: (context, state) {
+          return CustomButton(
+            margin: EdgeInsets.only(
+              top: 30,
+              bottom: 46,
             ),
+            title: 'Go To Checkout',
+            onPressed: () {
+              int price = model.price * state.length;
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CheckoutPage(
+                    TransactionModel(
+                      destination: model,
+                      amountUser: state.length,
+                      seatSelected: state.join(', '),
+                      snack: true,
+                      price: price,
+                      vat: 0.6,
+                      totalPrice: price + (price * 0.45).toInt(),
+                    ),
+                  ),
+                ),
+              );
+            },
           );
         },
       );

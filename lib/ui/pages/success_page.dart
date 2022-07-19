@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travelholic/cubit/cubit_cubit.dart';
 import 'package:travelholic/ui/widgets/item_button.dart';
 import '../../shared/theme.dart';
 
@@ -49,6 +51,7 @@ class SuccessPage extends StatelessWidget {
             CustomButton(
               title: 'My Bookings',
               onPressed: () {
+                context.read<CubitCubit>().setPage(1);
                 Navigator.pushNamedAndRemoveUntil(
                     context, '/main', (route) => false);
               },

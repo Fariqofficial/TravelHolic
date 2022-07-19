@@ -8,6 +8,7 @@ class ModelDestination extends Equatable {
   final double rating;
   final int price;
   final String description;
+  final String flightCode;
   final String popularImg1;
   final String popularImg2;
   final String popularImg3;
@@ -23,6 +24,7 @@ class ModelDestination extends Equatable {
     this.rating = 0.0,
     this.price = 0,
     this.description = '',
+    this.flightCode = '',
     this.popularImg1 = '',
     this.popularImg2 = '',
     this.popularImg3 = '',
@@ -40,6 +42,7 @@ class ModelDestination extends Equatable {
         rating: json['rating'],
         price: json['price'],
         description: json['description'] ?? '',
+        flightCode: json['flightCode'] ?? '',
         popularImg1: json['popularPlace1'] ?? '',
         popularImg2: json['popularPlace2'] ?? '',
         popularImg3: json['popularPlace3'] ?? '',
@@ -47,6 +50,23 @@ class ModelDestination extends Equatable {
         popularName2: json['popularPlaceName2'] ?? '',
         popularName3: json['popularPlaceName3'] ?? '',
       );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'city': city,
+        'imageUrl': imageUrl,
+        'rating': rating,
+        'price': price,
+        'description': description,
+        'flightCode': flightCode,
+        'popularPlace1': popularImg1,
+        'popularPlace2': popularImg2,
+        'popularPlace3': popularImg3,
+        'popularPlaceName1': popularName1,
+        'popularPlaceName2': popularName2,
+        'popularPlaceName3': popularName3,
+      };
 
   @override
   List<Object?> get props => [
@@ -57,6 +77,7 @@ class ModelDestination extends Equatable {
         rating,
         price,
         description,
+        flightCode,
         popularImg1,
         popularImg2,
         popularImg3,

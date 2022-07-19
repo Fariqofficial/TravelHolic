@@ -1,12 +1,19 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:travelholic/cubit/auth_cubit.dart';
+import 'package:travelholic/cubit/transaction_cubit.dart';
+import 'package:travelholic/models/model_transaction.dart';
 import 'package:travelholic/ui/pages/success_page.dart';
 import 'package:travelholic/ui/widgets/item_bookings.dart';
 import 'package:travelholic/ui/widgets/item_button.dart';
 import '../../shared/theme.dart';
 
 class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({Key? key}) : super(key: key);
+  final TransactionModel model;
+
+  const CheckoutPage(this.model, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +59,14 @@ class CheckoutPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'LBJ',
+                      model.destination.flightCode,
                       style: textBlack.copyWith(
                         fontSize: 24,
                         fontWeight: semiBold,
                       ),
                     ),
                     Text(
-                      'East Nusa Tenggara',
+                      model.destination.city,
                       style: textGrey.copyWith(
                         fontWeight: light,
                       ),
@@ -98,8 +105,8 @@ class CheckoutPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(18),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage(
-                        'assets/labuan.jpg',
+                      image: NetworkImage(
+                        model.destination.imageUrl,
                       ),
                     ),
                   ),
@@ -109,7 +116,7 @@ class CheckoutPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Labuan Bajo',
+                        model.destination.name,
                         style: textBlack.copyWith(
                           fontSize: 16,
                           fontWeight: medium,
@@ -119,7 +126,7 @@ class CheckoutPage extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        'East Nusa Tenggara',
+                        model.destination.city,
                         style: textGrey.copyWith(
                           fontWeight: light,
                         ),
@@ -144,7 +151,7 @@ class CheckoutPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '4.8',
+                      model.destination.rating.toString(),
                       style: textBlack.copyWith(
                         fontWeight: medium,
                       ),
@@ -169,32 +176,40 @@ class CheckoutPage extends StatelessWidget {
             //NOTE : Item booking
             BookingItem(
               title: 'Person :',
-              valueText: '2 Person',
+              valueText: '${model.amountUser} Person',
               valueClr: blackColor,
             ),
             BookingItem(
               title: 'Seat :',
-              valueText: 'C5,D5',
+              valueText: model.seatSelected,
               valueClr: blackColor,
             ),
             BookingItem(
               title: 'Snack :',
-              valueText: 'YES',
-              valueClr: borderAvailable,
+              valueText: model.snack ? 'YES' : 'NO',
+              valueClr: model.snack ? borderAvailable : softredColor,
             ),
             BookingItem(
               title: 'VAT :',
-              valueText: '6%',
+              valueText: '${(model.vat * 100).toStringAsFixed(0)}%',
               valueClr: blackColor,
             ),
             BookingItem(
               title: 'Price :',
-              valueText: 'Rp. 10.000.000',
+              valueText: NumberFormat.currency(
+                locale: 'id',
+                symbol: 'Rp ',
+                decimalDigits: 0,
+              ).format(model.price),
               valueClr: blackColor,
             ),
             BookingItem(
               title: 'Total Price (Inc VAT) :',
-              valueText: 'Rp. 10.600.000',
+              valueText: NumberFormat.currency(
+                locale: 'id',
+                symbol: 'Rp ',
+                decimalDigits: 0,
+              ).format(model.totalPrice),
               valueClr: softredColor,
             ),
           ],
@@ -203,108 +218,140 @@ class CheckoutPage extends StatelessWidget {
     }
 
     Widget paymentMethod() {
-      return Container(
-        margin: EdgeInsets.only(top: 30),
-        padding: EdgeInsets.symmetric(
-          vertical: 30,
-          horizontal: 20,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-          color: whiteColor,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Payment Details',
-              style: textBlack.copyWith(
-                fontSize: 16,
-                fontWeight: semiBold,
+      return BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          if (state is AuthSuccess) {
+            return Container(
+              margin: EdgeInsets.only(top: 30),
+              padding: EdgeInsets.symmetric(
+                vertical: 30,
+                horizontal: 20,
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 16),
-              child: Row(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                color: whiteColor,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: 100,
-                    height: 70,
-                    margin: EdgeInsets.only(right: 16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          'assets/img_card.png',
-                        ),
-                      ),
+                  Text(
+                    'Payment Details',
+                    style: textBlack.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
                     ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 35,
-                            height: 35,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  'assets/image_travelh.png',
-                                ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 16),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 70,
+                          margin: EdgeInsets.only(right: 16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(
+                                'assets/img_card.png',
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  //NOTE : Bagian saldo
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Rp. 45.000.000',
-                          style: textBlack.copyWith(
-                            fontSize: 18,
-                            fontWeight: medium,
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 35,
+                                  height: 35,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        'assets/image_travelh.png',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          'Your Balance',
-                          style: textGrey.copyWith(
-                            fontWeight: light,
+
+                        //NOTE : Bagian saldo
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                NumberFormat.currency(
+                                  locale: 'id',
+                                  symbol: 'Rp ',
+                                  decimalDigits: 0,
+                                ).format(state.modelUser.balance),
+                                style: textBlack.copyWith(
+                                  fontSize: 18,
+                                  fontWeight: medium,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                'Your Balance',
+                                style: textGrey.copyWith(
+                                  fontWeight: light,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ),
+                  )
                 ],
               ),
-            )
-          ],
-        ),
+            );
+          }
+          return SizedBox();
+        },
       );
     }
 
     Widget buttonPay() {
-      return CustomButton(
-        title: 'Pay Now',
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SuccessPage(),
-            ),
+      return BlocConsumer<TransactionCubit, TransactionState>(
+        listener: (context, state) {
+          if (state is TransactionSuccess) {
+            //Ketika sudah navigasi tidak bisa kembali ke menu sebelumnya
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/success', (route) => false);
+          } else if (state is TransactionFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: softredColor,
+                content: Text(state.error),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is TransactionLoading) {
+            return Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(top: 30),
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return CustomButton(
+            title: 'Pay Now',
+            onPressed: () {
+              context.read<TransactionCubit>().createTransaction(model);
+            },
+            margin: EdgeInsets.only(top: 30),
           );
         },
-        margin: EdgeInsets.only(top: 30),
       );
     }
 
