@@ -1,6 +1,6 @@
 # Travelholic
 
-Travelholic is an android application used for booking tickets to tourist destinations. Built with state management bloc and also using firebase firestore.
+Travelholic is an android application used for booking tickets to tourist destinations. Built with state management cubit and also using firebase firestore.
 
 # Travelholic Features
 
